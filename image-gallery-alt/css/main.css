@@ -1,0 +1,35 @@
+ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+   }
+   
+   ul li {
+    display: inline;
+   }
+   
+   .container{
+   display:flex;
+   justify-content: center;
+   }
+   .thumbs{
+   display:flex;
+   justify-content: center;
+   align-items: center;
+   }
+   .thumbnail {
+    border: 2px solid #ffffff;
+   }
+   
+   .thumbs ul li:hover {
+    opacity: 0.70;
+    cursor:pointer;
+   }
+   
+   .selected-thumb {
+    border-color: #0A93FC;
+   }
+   
+   .left-btn, .right-btn {
+   cursor: pointer;
+   }

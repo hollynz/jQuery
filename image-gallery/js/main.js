@@ -19,7 +19,7 @@ var imgArr = [
 var selected = 0;
 
 // Loads array of images and sets attributes
-function loadImgArray(imgArr) {
+function init(imgArr) {
     // Add thumbnails
     for (var i = 0; i < imgArr.length; i++) {
         var img = new Image();
@@ -42,10 +42,8 @@ function loadImgArray(imgArr) {
 };
 
 // Update selected thumbnail
-function updateSelected(selected) {
+function updateSelected(updatedImg) {
     $('.outline').toggleClass('outline');
-    // Get the element with data-id === selected
-    var updatedImg = $(`img[data-id=${selected}]`);
     updatedImg.toggleClass('outline');
     var newSrc = updatedImg.attr('src');
     $('.main-image').attr('src', newSrc);
@@ -54,31 +52,27 @@ function updateSelected(selected) {
 
 // When window is loaded, loads images and sets event listeners
 $(document).ready(function () {
-    loadImgArray(imgArr);
+    init(imgArr);
     $('.thumbnails img').click(function () {
-        $('.outline').toggleClass('outline');
-        $(this).toggleClass('outline');
-        var newSrc = $(this).attr('src');
-        $('.main-image').attr('src', newSrc);
+        updateSelected($(this));
+        selected = $(this).attr('data-id');
     });
     $('.fa-chevron-left').click(function () {
         if (selected == 0) {
             selected = imgArr.length - 1;
-            updateSelected(selected);
-            return;
+        }else {
+            selected--;
         }
-        selected--;
-        updateSelected(selected);
+        updateSelected($(`img[data-id=${selected}]`));
         return;
     });
     $('.fa-chevron-right').click(function () {
         if (selected == imgArr.length - 1) {
             selected = 0;
-            updateSelected(selected);
-            return;
+        }else {
+            selected++;
         }
-        selected++;
-        updateSelected(selected);
+        updateSelected($(`img[data-id=${selected}]`));
         return;
     });
 });
