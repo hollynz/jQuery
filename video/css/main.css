@@ -1,0 +1,25 @@
+body {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.container {
+    padding-top: 10%;
+    padding-bottom: 10%;
+    background: linear-gradient(white, rgba(135, 176, 236, 0.452), white);
+    width: 80%;
+    margin: auto;
+}
+
+.video-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+h3 {
+    font-size: 1.2em;
+}
+
+img {
+    cursor: pointer;
+}
