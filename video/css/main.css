@@ -2,7 +2,30 @@ body {
     font-family: 'Ubuntu', sans-serif;
 }
 
+h3 {
+    font-size: 1.2em;
+}
+
+nav {
+    height: 20vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: space-between;
+    justify-content: space-between;
+}
+
+.nav-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 80%;
+}
+
 .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     padding-top: 10%;
     padding-bottom: 10%;
     background: linear-gradient(white, rgba(135, 176, 236, 0.452), white);
@@ -16,10 +39,30 @@ body {
     justify-content: space-evenly;
 }
 
-h3 {
-    font-size: 1.2em;
-}
-
 img {
     cursor: pointer;
+}
+
+.search {
+    width: 20vw;
+    margin: auto;
+}
+
+.search form input{
+    margin: auto;
+    width: 100%;
+    height: 1.6rem;
+    padding: 2%;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 1.4rem;
+}
+
+.category-list {
+    width: 60%;
+    margin: auto;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    font-size: 2rem;
 }

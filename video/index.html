@@ -2,38 +2,55 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Video Player</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-        <link rel="stylesheet" href="css/main.css">
-    </head>
-    <body>
-        <!--[if lt IE 7]>
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Video Player</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+    <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        
-        <header>
-            <nav>
-                <form onsubmit="return false">
-                    <input type="text" id="titleSearchBox" placeholder="Enter video title...">
-                </form>
-            </nav>
-        </header>
-        <div class="container">
-            <div class="video-list"></div>
-        </div>
 
-        <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/FkpCP9R1Jjc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <header>
+        <nav>
+            <div class="logo">
+                LOGO
+            </div>
+            <div class="nav-container">
+                <ul class="category-list"></ul>
+                <div class="search">
+                    <form onsubmit="return false">
+                        <input type="text" id="titleSearchBox" placeholder="Type video title..." onfocus="this.placeholder = ''" onblur="this.placeholder = 'Type video title...'">
+                    </form>
+                </div>
+            </div>
+
+        </nav>
+    </header>
+
+    <div class="container">
+
+        <div class="video-list"></div>
+        <iframe src="" id="player" title="YouTube Video Player" width="480" height="390" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/FkpCP9R1Jjc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         <iframe width="560" height="315" src="https://www.youtube.com/embed/FkpCP9R1Jjc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         <iframe width="560" height="315" src="https://www.youtube.com/embed/FkpCP9R1Jjc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         <iframe width="560" height="315" src="https://www.youtube.com/embed/FkpCP9R1Jjc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="js/video.js"></script>
-    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/video.js"></script>
+</body>
+
 </html>
