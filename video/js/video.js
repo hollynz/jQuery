@@ -53,7 +53,7 @@ function getVideoItemHTML(video) {
 */
 function getCategoryItemHTML(category) {
     return `<li data-slug="${category.slug} class="category-item">
-                ${category.title}
+                <a href="#">${category.title}</a>
             </li>`;
 };
 
