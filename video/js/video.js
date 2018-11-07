@@ -81,6 +81,9 @@ function filterByTitle(videos, title) {
  * @param {Number} categoryId
  */
 function filterByCategory(videos, categoryId) {
+    if(categoryId == 0) {
+        return videoData.videos;
+    }
     return videos.filter(function (video) {
         return video.categoryId == categoryId;
     });
@@ -180,8 +183,8 @@ function playVideo(videoId) {
 function doAdvancedSearch() {
     let title = avTitleSearchBox.val();
     let category = avCategoryDropdown.val();
-    let filteredVideos = filterByTitle(videoData.videos, title);
-    filteredVideos = filterByCategory(filteredVideos, category);
+    let filteredVideos = filterByCategory(videoData.videos, category);
+    filteredVideos = filterByTitle(filteredVideos, title);
     displayVideos(filteredVideos);
 };
 
