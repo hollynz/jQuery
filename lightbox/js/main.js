@@ -7,7 +7,7 @@ $(document).ready(function () {
         var selectedImg = $(this);
         var modalImg = $('.modal__img');
         var newSrc = selectedImg.attr('src').replace('300/200', '560/360');
-        console.log(newSrc);
+        // console.log(newSrc);
         modalImg.attr('src', newSrc);
         $('.closed').removeClass('closed');
     });

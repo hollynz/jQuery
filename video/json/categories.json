@@ -2,13 +2,13 @@
     "categories": [
         {
             "id": 0,
-            "title": "Web Design",
-            "slug": "web-design"
+            "title": "Music",
+            "slug": "music"
         },
         {
             "id": 1,
-            "title": "Web Dev",
-            "slug": "web-dev"
+            "title": "MTB",
+            "slug": "mtb"
         }
     ]
 }

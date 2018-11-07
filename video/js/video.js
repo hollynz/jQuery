@@ -2,7 +2,8 @@
 let videoListEl = $('.video-list'),
     titleSearchBox = $('#titleSearchBox'),
     player = $('#player'),
-    categoryListEl = $('.category-list');
+    categoryListEl = $('.category-list'),
+    modalCloseBtn = $('.modal-overlay__close');
 
 let videoData;
 
@@ -69,7 +70,14 @@ function displayVideos(videos) {
     // Add click event listener to each video item
     let videoItems = $('.video-item');
     videoItems.on('click', function() {
+        var selectedVideo = $(this);
+        var modalImg = $('.modal__img');
         playVideo($(this).data('id'));
+        $('.closed').removeClass('closed');
+    });
+    modalCloseBtn.click(function() {
+        $('.modal-overlay').addClass('closed');
+        $('.modal').addClass('closed');
     });
 };
 
