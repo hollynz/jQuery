@@ -26,7 +26,7 @@ function init() {
 };
 
 /**
-* Display the videos that match a title.
+* Filters and displays videos that match a given title.
 * @param {String} title
 */
 function displayVideosByTitle(title) {
@@ -35,6 +35,17 @@ function displayVideosByTitle(title) {
     });
     displayVideos(filteredVideos);
 };
+
+/**
+ * Filters and displays videos by a given category.
+ * @param {Number} categoryid
+ */
+function displayVideosByCategory(categoryid) {
+    let filteredVideos = videoData.videos.filter(function (video) {
+        return video.categoryId === categoryid;
+    });
+    displayVideos(filteredVideos);
+}
 
 /**
 * Get the HTML string for one video list item.
@@ -52,13 +63,14 @@ function getVideoItemHTML(video) {
 * @param {Object} video
 */
 function getCategoryItemHTML(category) {
-    return `<li data-slug="${category.slug} class="category-item">
-                <a href="#">${category.title}</a>
+    return `<li data-categoryid="${category.id}" class="category-item">
+                ${category.title}
             </li>`;
 };
 
 /**
-* Display a list of videos.
+ * Displays a list of videos.
+* @param {Array} videos
 */
 function displayVideos(videos) {
     let htmlString = '';
@@ -85,9 +97,10 @@ function displayCategories(categories) {
     categoryListEl.html(htmlString);
     // Add click event listener to each category item
     let categoryItems = $('.category-item');
+    console.log(categoryItems);
     categoryItems.on('click', function() {
-        // displayCategories();
-        // playVideo($(this).data('id'));
+        console.log('clicked');
+        displayVideosByCategory($(this).data('categoryid'));
     });
 };
 
