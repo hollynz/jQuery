@@ -2,11 +2,16 @@
     "categories": [
         {
             "id": 0,
+            "title": "All",
+            "slug": "all"
+        },
+        {
+            "id": 1,
             "title": "Music",
             "slug": "music"
         },
         {
-            "id": 1,
+            "id": 2,
             "title": "MTB",
             "slug": "mtb"
         }

@@ -3,7 +3,12 @@ let videoListEl = $('.video-list'),
     titleSearchBox = $('#titleSearchBox'),
     player = $('#player'),
     categoryListEl = $('.category-list'),
-    modalCloseBtn = $('.modal-overlay__close');
+    modalCloseBtn = $('.modal-overlay__close'),
+    avLink = $('.advanced-search'),
+    avTitleSearchBox = $('#avTitleSearchBox'),
+    avCategorySearchBox = $('#avCategorySearchBox'),
+    avSubmitBtn = $('#avSubmitBtn'),
+    avContainer = $('.advanced-search-container');
 
 let videoData;
 
@@ -16,7 +21,10 @@ function init() {
         videoData = videos;
         displayVideos(videoData.videos);
         titleSearchBox.on('keyup', function () {
-            displayVideosByTitle($(this).val());
+            let title = $(this).val();
+            let filteredVideos = filterByTitle(videoData.videos, title);
+            displayVideos(filteredVideos);
+            // displayVideosByTitle($(this).val());
         });
     });
     // Get categories
@@ -24,28 +32,57 @@ function init() {
         categoryData = categories;
         displayCategories(categoryData.categories);
     });
+    // Advanced Search Link
+    avLink.on('click', function() {
+        avContainer.toggle();
+    });
+    avSubmitBtn.on('click', doAdvancedSearch);
 };
 
 /**
 * Filters and displays videos that match a given title.
 * @param {String} title
 */
-function displayVideosByTitle(title) {
-    let filteredVideos = videoData.videos.filter(function (video) {
+// function displayVideosByTitle(title) {
+//     let filteredVideos = videoData.videos.filter(function (video) {
+//         return video.title.toLowerCase().includes(title.toLowerCase());
+//     });
+//     displayVideos(filteredVideos);
+// };
+
+/**
+ * Filters an array of videos by title.
+ * @param {Array} videos
+ * @param {String} title
+ */
+function filterByTitle(videos, title) {
+    return videos.filter(function (video) {
         return video.title.toLowerCase().includes(title.toLowerCase());
     });
-    displayVideos(filteredVideos);
 };
+
+
 
 /**
  * Filters and displays videos by a given category.
  * @param {Number} categoryid
  */
-function displayVideosByCategory(categoryid) {
-    let filteredVideos = videoData.videos.filter(function (video) {
-        return video.categoryId === categoryid;
+// function displayVideosByCategory(categoryid) {
+//     let filteredVideos = videoData.videos.filter(function (video) {
+//         return video.categoryId === categoryid;
+//     });
+//     displayVideos(filteredVideos);
+// }
+
+/**
+ * Filters an array of videos by category id.
+ * @param {Array} videos
+ * @param {Number} categoryId
+ */
+function filterByCategory(videos, categoryId) {
+    return videos.filter(function (video) {
+        return video.categoryId == categoryId;
     });
-    displayVideos(filteredVideos);
 }
 
 /**
@@ -105,10 +142,15 @@ function displayCategories(categories) {
     categoryListEl.html(htmlString);
     // Add click event listener to each category item
     let categoryItems = $('.category-item');
-    console.log(categoryItems);
     categoryItems.on('click', function() {
-        console.log('clicked');
-        displayVideosByCategory($(this).data('categoryid'));
+        if($(this).data('categoryid') === 0) {
+            displayVideos(videoData.videos);
+        }else{
+            let categoryId = $(this).data('categoryid');
+            let filteredVideos = filterByCategory(videoData.videos, categoryId);
+            displayVideos(filteredVideos);
+            // displayVideosByCategory($(this).data('categoryid'));
+        }
     });
 };
 
@@ -119,6 +161,17 @@ function displayCategories(categories) {
 function playVideo(videoId) {
     let youtubeId = videoData.videos[videoId].youtubeId;
     player.attr('src', 'http://www.youtube.com/embed/' + youtubeId + '?autoplay=1');
+};
+
+/**
+ * 
+ */
+function doAdvancedSearch() {
+    let title = avTitleSearchBox.val();
+    let category = avCategorySearchBox.val();
+    let filteredVideos = filterByTitle(videoData.videos, title);
+    filteredVideos = filterByCategory(filteredVideos, category);
+    displayVideos(filteredVideos);
 };
 
 init();

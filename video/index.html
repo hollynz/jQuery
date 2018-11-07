@@ -25,7 +25,7 @@
     <header>
         <nav>
             <div class="logo">
-                LOGO
+                HOLLY!
             </div>
             <div class="nav-container">
                 <ul class="category-list"></ul>
@@ -34,15 +34,21 @@
                         <input type="text" id="titleSearchBox" placeholder="Search for a video..." onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search for a video...'">
                     </form>
                 </div>
+                <a href="#" class="advanced-search">Advanced Search</a>
+                <div class="advanced-search-container">
+                    <form onsubmit="return false">
+                        <input type="text" id="avTitleSearchBox" placeholder="Search for a video...">
+                        <input type="text" id="avCategorySearchBox" placeholder="Search for a category...">
+                        <input id="avSubmitBtn" type="submit" value="Advanced Search">
+                    </form>
+                </div>
             </div>
 
         </nav>
     </header>
 
     <div class="container">
-
         <div class="video-list"></div>
-        
     </div>
 
     <div class="modal-overlay closed" id="modal-overlay">
