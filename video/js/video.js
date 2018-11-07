@@ -6,7 +6,8 @@ let videoListEl = $('.video-list'),
     modalCloseBtn = $('.modal-overlay__close'),
     avLink = $('.advanced-search'),
     avTitleSearchBox = $('#avTitleSearchBox'),
-    avCategorySearchBox = $('#avCategorySearchBox'),
+    avCategoryDropdown = $('#avCategoryDropdown'),
+    // avCategorySearchBox = $('#avCategorySearchBox'),
     avSubmitBtn = $('#avSubmitBtn'),
     avContainer = $('.advanced-search-container');
 
@@ -135,6 +136,10 @@ function displayVideos(videos) {
  * @param {Object} categories
  */
 function displayCategories(categories) {
+    // Display category list items
+
+
+    // FIX THE NAMING
     let htmlString = '';
     $.each(categories, function (i, category) {
         htmlString = htmlString + getCategoryItemHTML(category);
@@ -152,6 +157,12 @@ function displayCategories(categories) {
             // displayVideosByCategory($(this).data('categoryid'));
         }
     });
+    // Display category dropdown items
+    let htmlDropdownString = '';
+    $.each(categories, function (i, category) {
+        htmlDropdownString = htmlDropdownString + `<option value="${category.id}">${category.title}</option>` ;
+    });
+    avCategoryDropdown.html(htmlDropdownString);
 };
 
 /**
@@ -168,7 +179,7 @@ function playVideo(videoId) {
  */
 function doAdvancedSearch() {
     let title = avTitleSearchBox.val();
-    let category = avCategorySearchBox.val();
+    let category = avCategoryDropdown.val();
     let filteredVideos = filterByTitle(videoData.videos, title);
     filteredVideos = filterByCategory(filteredVideos, category);
     displayVideos(filteredVideos);
