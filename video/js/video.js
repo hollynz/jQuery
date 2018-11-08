@@ -9,16 +9,18 @@ let videoListEl = $('.video-list'),
     avCategoryDropdown = $('#avCategoryDropdown'),
     // avCategorySearchBox = $('#avCategorySearchBox'),
     avSubmitBtn = $('#avSubmitBtn'),
-    avContainer = $('.advanced-search-container');
+    avContainer = $('.advanced-search-container'),
+    screenLinks = $('.screen-link'),
+    screens = $('.screen');
 
-let videoData;
+let videoData, categoryData, usersData, screenId; // Does catData get used??
 
 /**
 * Initialise the app.
 */
 function init() {
     // Get videos
-    $.getJSON('json/videos.json', function(videos) {
+    $.getJSON('json/videos.json', function (videos) {
         videoData = videos;
         displayVideos(videoData.videos);
         titleSearchBox.on('keyup', function () {
@@ -27,17 +29,26 @@ function init() {
             displayVideos(filteredVideos);
             // displayVideosByTitle($(this).val());
         });
+        // titleSearchBox.on('blur', function () {
+        //     $(this).val() = '';
+        // });
     });
     // Get categories
-    $.getJSON('json/categories.json', function(categories) {
+    $.getJSON('json/categories.json', function (categories) {
         categoryData = categories;
         displayCategories(categoryData.categories);
     });
-    // Advanced Search Link
-    avLink.on('click', function() {
+    // Advanced Search
+    avLink.on('click', function () {
         avContainer.toggle();
     });
     avSubmitBtn.on('click', doAdvancedSearch);
+    // Routing
+    if(localStorage.getItem('currentScreen')) {
+        screenId = localStorage.getItem('currentScreen');
+        changeScreen();
+    }
+    screenLinks.on('click', changeScreen);
 };
 
 /**
@@ -81,7 +92,7 @@ function filterByTitle(videos, title) {
  * @param {Number} categoryId
  */
 function filterByCategory(videos, categoryId) {
-    if(categoryId == 0) {
+    if (categoryId == 0) {
         return videoData.videos;
     }
     return videos.filter(function (video) {
@@ -122,13 +133,13 @@ function displayVideos(videos) {
     videoListEl.html(htmlString);
     // Add click event listener to each video item
     let videoItems = $('.video-item');
-    videoItems.on('click', function() {
-        var selectedVideo = $(this);
-        var modalImg = $('.modal__img');
+    videoItems.on('click', function () {
+        // var selectedVideo = $(this);
+        // var modalVid = $('.modal__vid');
         playVideo($(this).data('id'));
         $('.closed').removeClass('closed');
     });
-    modalCloseBtn.click(function() {
+    modalCloseBtn.click(function () {
         $('.modal-overlay').addClass('closed');
         $('.modal').addClass('closed');
     });
@@ -150,10 +161,10 @@ function displayCategories(categories) {
     categoryListEl.html(htmlString);
     // Add click event listener to each category item
     let categoryItems = $('.category-item');
-    categoryItems.on('click', function() {
-        if($(this).data('categoryid') === 0) {
+    categoryItems.on('click', function () {
+        if ($(this).data('categoryid') === 0) {
             displayVideos(videoData.videos);
-        }else{
+        } else {
             let categoryId = $(this).data('categoryid');
             let filteredVideos = filterByCategory(videoData.videos, categoryId);
             displayVideos(filteredVideos);
@@ -163,7 +174,7 @@ function displayCategories(categories) {
     // Display category dropdown items
     let htmlDropdownString = '';
     $.each(categories, function (i, category) {
-        htmlDropdownString = htmlDropdownString + `<option value="${category.id}">${category.title}</option>` ;
+        htmlDropdownString = htmlDropdownString + `<option value="${category.id}">${category.title}</option>`;
     });
     avCategoryDropdown.html(htmlDropdownString);
 };
@@ -186,6 +197,41 @@ function doAdvancedSearch() {
     let filteredVideos = filterByCategory(videoData.videos, category);
     filteredVideos = filterByTitle(filteredVideos, title);
     displayVideos(filteredVideos);
+};
+
+/**
+ * Change the screen.
+ */
+function changeScreen() {
+    if(!screenId) {
+        screenId = $(this).data('screen');
+    }
+    screenLinks.removeClass('active');
+    $(this).addClass('active');
+    
+    if (screenId === 'about' && !usersData) {
+        loadAboutScreen();
+    }
+    screens.removeClass('active');
+    // Show screen after loading
+    $('#' + screenId).addClass('active');
+    localStorage.setItem('currentScreen', screenId)
+    // Reset screen id
+    screenId = null;
+};
+
+/**
+ * Lazy load About screen.
+ */
+function loadAboutScreen() {
+    let displayNameEl = $('#displayName'),
+        bioEl = $('#bio');
+    $.getJSON('json/users.json', function (users) {
+        usersData = users;
+        let me = usersData.users[0];
+        displayNameEl.html(me.displayName);
+        bioEl.html(me.bio);
+    });
 };
 
 init();

@@ -13,7 +13,8 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+        crossorigin="anonymous">
     <link rel="stylesheet" href="css/main.css">
 </head>
 
@@ -27,37 +28,54 @@
             <div class="logo">
                 HOLLY!
             </div>
-            <div class="nav-container">
-                <ul class="category-list"></ul>
-                <div class="search">
-                    <form onsubmit="return false">
-                        <input type="text" id="titleSearchBox" placeholder="Search for a video..." onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search for a video...'">
-                    </form>
-                </div>
-                <a href="#" class="advanced-search">Advanced Search</a>
-                <div class="advanced-search-container">
-                    <form onsubmit="return false">
-                        <input type="text" id="avTitleSearchBox" placeholder="Search for a video...">
-                        <select id="avCategoryDropdown"></select>
-                        <!-- <input type="text" id="avCategorySearchBox" placeholder="Search for a category..."> -->
-                        <input id="avSubmitBtn" type="submit" value="Advanced Search">
-                    </form>
-                </div>
-            </div>
-
+            <ul class="main-nav">
+                <li>
+                    <a data-screen="home" class="screen-link active" href="#">Sick vids I like</a>
+                </li>
+                <li>
+                    <a data-screen="about" class="screen-link" href="#">Stuff about me</a>
+                </li>
+            </ul>
         </nav>
     </header>
 
-    <div class="container">
-        <div class="video-list"></div>
+    <div class="container content">
+        <!-- Home screen -->
+        <div id="home" class="screen active">
+                <div class="home-nav-container">
+                        <ul class="category-list"></ul>
+                        <div class="search">
+                            <form onsubmit="return false">
+                                <input type="text" id="titleSearchBox" placeholder="Search for a video..." onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search for a video...'">
+                            </form>
+                        </div>
+                        <a href="#" class="advanced-search">Advanced Search</a>
+                        <div class="advanced-search-container">
+                            <form onsubmit="return false">
+                                <input type="text" id="avTitleSearchBox" placeholder="Search for a video...">
+                                <select id="avCategoryDropdown"></select>
+                                <!-- <input type="text" id="avCategorySearchBox" placeholder="Search for a category..."> -->
+                                <input id="avSubmitBtn" type="submit" value="Advanced Search">
+                            </form>
+                        </div>
+                    </div>
+            <div class="video-list"></div>
+            <div class="modal-overlay closed" id="modal-overlay">
+                <i class="fas fa-times-circle modal-overlay__close"></i>
+            </div>
+            <div class="modal closed" id="modal">
+                <iframe src="" id="player" title="YouTube Video Player" width="480" height="390" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+        <!-- About screen -->
+        <div id="about" class="screen">
+            <h1>About the developer</h1>
+            <h2 id="displayName"></h2>
+            <p id="bio"></p>
+        </div>
     </div>
 
-    <div class="modal-overlay closed" id="modal-overlay">
-        <i class="fas fa-times-circle modal-overlay__close"></i>
-    </div>
-    <div class="modal closed" id="modal">
-        <iframe src="" id="player" class="modal__img" title="YouTube Video Player" width="480" height="390" frameborder="0" allowfullscreen></iframe>
-    </div>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="js/video.js"></script>

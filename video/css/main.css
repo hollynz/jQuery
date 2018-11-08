@@ -1,6 +1,11 @@
 html {
+    height: 100%;
+}
+
+body {
     font-family: 'Ubuntu', sans-serif;
     background: linear-gradient(rgb(255, 255, 255) 20%, rgba(45, 110, 209, 0.5)) no-repeat;
+    height: 100%;
 }
 
 h3 {
@@ -15,11 +20,13 @@ nav {
     justify-content: space-evenly;
 }
 
-.nav-container {
+.home-nav-container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 80%;
+    width: 80vw;
+    margin: 2% auto;
+    margin-bottom: 15%;
 }
 
 .logo {
@@ -62,7 +69,6 @@ nav {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding-top: 10%;
     padding-bottom: 10%;
     width: 80%;
     margin: auto;
@@ -149,4 +155,29 @@ iframe {
 .closed {
     display: none;
 }
+
+/* links */
+.main-nav li{
+    display: inline-block;
+    padding: 10px 20px;
+  }
+  .main-nav a{
+    color: blue;
+    text-decoration: none;
+  }
+  .main-nav a.active{
+    text-decoration: underline;
+  }
+  
+  /* screens */
+  .content .screen {
+    display: none;
+  }
+  .screen.active {
+    display: block;
+  }
+
+  .advanced-search-container {
+      display: none;
+  }
 
