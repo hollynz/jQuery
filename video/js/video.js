@@ -11,7 +11,8 @@ let videoListEl = $('.video-list'),
     avSubmitBtn = $('#avSubmitBtn'),
     avContainer = $('.advanced-search-container'),
     screenLinks = $('.screen-link'),
-    screens = $('.screen');
+    screens = $('.screen'),
+    containerEl = $('.container');
 
 let videoData, categoryData, usersData, screenId;
 
@@ -164,12 +165,13 @@ function displayCategories(categories) {
         htmlString = htmlString + getCategoryItemHTML(category);
     });
     categoryListEl.html(htmlString);
-    // Add click event listener to each category item
+    // Add click event lisxtener to each category item
     let categoryItems = $('.category-item');
+    console.log(categoryListEl);
     categoryItems.on('click', function () {
         if ($(this).data('categoryid') === 0) {
             displayVideos(videoData.videos);
-        } else {
+        }else {
             let categoryId = $(this).data('categoryid');
             let filteredVideos = filterByCategory(videoData.videos, categoryId);
             displayVideos(filteredVideos);

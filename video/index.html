@@ -42,29 +42,35 @@
     <div class="container content">
         <!-- Home screen -->
         <div id="home" class="screen active">
-                <div class="home-nav-container">
-                        <ul class="category-list"></ul>
-                        <div class="search">
-                            <form onsubmit="return false">
-                                <input type="text" id="titleSearchBox" placeholder="Search for a video..." onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search for a video...'">
-                            </form>
-                        </div>
-                        <a href="#" class="advanced-search">Advanced Search</a>
-                        <div class="advanced-search-container">
-                            <form onsubmit="return false">
-                                <input type="text" id="avTitleSearchBox" placeholder="Search for a video...">
-                                <select id="avCategoryDropdown"></select>
-                                <!-- <input type="text" id="avCategorySearchBox" placeholder="Search for a category..."> -->
-                                <input id="avSubmitBtn" type="submit" value="Advanced Search">
-                            </form>
-                        </div>
+            <div class="home-nav-container">
+                <ul class="category-list"></ul>
+                <div class="search">
+                    <form onsubmit="return false">
+                        <input type="text" id="titleSearchBox" placeholder="Search for a video..." onfocus="this.placeholder = ''"
+                            onblur="this.placeholder = 'Search for a video...'">
+                    </form>
+                </div>
+                <div class="advanced-search-main-container">
+                    <a href="#" class="advanced-search"><button>Advanced Search</button></a>
+                    <div class="advanced-search-container">
+                        <form onsubmit="return false">
+                            <input type="text" id="avTitleSearchBox" placeholder="Search for a video...">
+                            <select id="avCategoryDropdown"></select>
+                            <!-- <input type="text" id="avCategorySearchBox" placeholder="Search for a category..."> -->
+                            <input id="avSubmitBtn" type="submit" value="Advanced Search">
+                        </form>
                     </div>
+                </div>
+            </div>
+            <!-- <h1>Vids</h1> -->
+
             <div class="video-list"></div>
             <div class="modal-overlay closed" id="modal-overlay">
                 <i class="fas fa-times-circle modal-overlay__close"></i>
             </div>
             <div class="modal closed" id="modal">
-                <iframe src="" id="player" title="YouTube Video Player" width="480" height="390" frameborder="0" allowfullscreen></iframe>
+                <iframe src="" id="player" title="YouTube Video Player" width="480" height="390" frameborder="0"
+                    allowfullscreen></iframe>
             </div>
         </div>
         <!-- About screen -->

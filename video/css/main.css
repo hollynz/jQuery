@@ -1,11 +1,11 @@
-html {
+html, body {
     height: 100%;
+    overflow: auto;
 }
 
 body {
     font-family: 'Ubuntu', sans-serif;
     background: linear-gradient(rgb(255, 255, 255) 20%, rgba(45, 110, 209, 0.5)) no-repeat;
-    height: 100%;
 }
 
 h3 {
@@ -26,7 +26,7 @@ nav {
     justify-content: space-between;
     width: 80vw;
     margin: 2% auto;
-    margin-bottom: 15%;
+    margin-bottom: 10%;
 }
 
 .logo {
@@ -177,7 +177,16 @@ iframe {
     display: block;
   }
 
+  .advanced-search-main-container {
+    text-align: center;
+    margin-top: 2%;
+    font-size: 1.4em;
+  }
+
   .advanced-search-container {
       display: none;
   }
 
+  .active-category {
+      color: purple;
+  }
