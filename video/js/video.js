@@ -13,7 +13,7 @@ let videoListEl = $('.video-list'),
     screenLinks = $('.screen-link'),
     screens = $('.screen');
 
-let videoData, categoryData, usersData, screenId; // Does catData get used??
+let videoData, categoryData, usersData, screenId;
 
 /**
 * Initialise the app.
@@ -29,9 +29,10 @@ function init() {
             displayVideos(filteredVideos);
             // displayVideosByTitle($(this).val());
         });
-        // titleSearchBox.on('blur', function () {
-        //     $(this).val() = '';
-        // });
+        titleSearchBox.on('blur', function () {
+            $(this).val('');
+            displayVideos(videoData.videos);
+        });
     });
     // Get categories
     $.getJSON('json/categories.json', function (categories) {
@@ -44,11 +45,15 @@ function init() {
     });
     avSubmitBtn.on('click', doAdvancedSearch);
     // Routing
+    screenLinks.on('click', changeScreen);
     if(localStorage.getItem('currentScreen')) {
         screenId = localStorage.getItem('currentScreen');
-        changeScreen();
+        let screenLink = $('[data-screen="' + screenId + '"]');
+        screenLink.click();
+        // changeScreen();
+    }else {
+        localStorage.setItem('currentScreen', screenId);
     }
-    screenLinks.on('click', changeScreen);
 };
 
 /**
