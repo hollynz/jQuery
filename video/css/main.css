@@ -1,8 +1,6 @@
 html {
     font-family: 'Ubuntu', sans-serif;
     background: linear-gradient(rgb(255, 255, 255) 20%, rgba(45, 110, 209, 0.5)) no-repeat;
-    height: 100%;
-    width: 100%;
 }
 
 h3 {
