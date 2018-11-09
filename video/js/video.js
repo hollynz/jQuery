@@ -148,6 +148,7 @@ function displayVideos(videos) {
     modalCloseBtn.click(function () {
         $('.modal-overlay').addClass('closed');
         $('.modal').addClass('closed');
+        player.attr('src', '');
     });
 };
 
