@@ -1,0 +1,20 @@
+{
+    "categories": [
+        {
+            "id": 0,
+            "name": "Ice Cream"
+        },
+        {
+            "id": 1,
+            "name": "Lollies"
+        },
+        {
+            "id": 2,
+            "name": "Biscuits"
+        },
+        {
+            "id": 3,
+            "name": "Chocolate"
+        }
+    ]
+ }

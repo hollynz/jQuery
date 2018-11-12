@@ -1,0 +1,106 @@
+{
+    "treats": [
+        {
+            "id": 0,
+            "name": "Magnum Blocks",
+            "price": 5.50,
+            "categoryId": 0
+        },
+        {
+            "id": 1,
+            "name": "Ben & Jerry's Tubs",
+            "price": 7.50,
+            "categoryId": 0
+        },
+        {
+            "id": 2,
+            "name": "Kapiti Blocks",
+            "price": 6.50,
+            "categoryId": 0
+        },
+        {
+            "id": 3,
+            "name": "Cornetto Blocks",
+            "price": 5.00,
+            "categoryId": 0
+        },
+        {
+            "id": 4,
+            "name": "Haribo Packets",
+            "price": 4.50,
+            "categoryId": 1
+        },
+        {
+            "id": 5,
+            "name": "Pineapple Lumps",
+            "price": 4.00,
+            "categoryId": 1
+        },
+        {
+            "id": 6,
+            "name": "Jet Planes",
+            "price": 4.50,
+            "categoryId": 1
+        },
+        {
+            "id": 7,
+            "name": "Jaffas",
+            "price": 3.50,
+            "categoryId": 1
+        },
+        {
+            "id": 8,
+            "name": "Milk Choc Digestives",
+            "price": 5.50,
+            "categoryId": 2
+        },
+        {
+            "id": 9,
+            "name": "Tim Tams",
+            "price": 5.00,
+            "categoryId": 2
+        },
+        {
+            "id": 10,
+            "name": "Afghans",
+            "price": 4.00,
+            "categoryId": 2
+        },
+        {
+            "id": 11,
+            "name": "Cookie Time Cookies",
+            "price": 2.50,
+            "categoryId": 2
+        },
+        {
+            "id": 12,
+            "name": "Whittaker's Blocks",
+            "price": 5.00,
+            "categoryId": 3
+        },
+        {
+            "id": 13,
+            "name": "Cadbury Blocks",
+            "price": 5.00,
+            "categoryId": 3
+        },
+        {
+            "id": 14,
+            "name": "Green & Blacks Blocks",
+            "price": 6.50,
+            "categoryId": 3
+        },
+        {
+            "id": 15,
+            "name": "Whittaker's Peanut Slabs",
+            "price": 3.50,
+            "categoryId": 3
+        },
+        {
+            "id": 16,
+            "name": "Toblerone Blocks",
+            "price": 7.00,
+            "categoryId": 3
+        }
+    ]
+ }

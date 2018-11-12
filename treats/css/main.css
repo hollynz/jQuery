@@ -1,0 +1,25 @@
+.container {
+    width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* links */
+  .main-nav li{
+    display: inline-block;
+    padding: 10px 20px;
+  }
+  .main-nav a{
+    color: green;
+    text-decoration: none;
+  }
+  .main-nav a.active{
+    text-decoration: underline;
+  }
+  
+  /* screens */
+  .content .screen {
+    display: none;
+  }
+  .screen.active {
+    display: block;
+  }
