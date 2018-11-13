@@ -12,6 +12,7 @@
     <title>Sweet Treats</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Crafty+Girls" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
 </head>
 
@@ -20,17 +21,35 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
+    <h1>Sweet Treats</h1>
+    <div class="container content">
 
-    <div class="container">
+        <!-- Initial form: home screen -->
+        <div id="initialForm" class="screen active">
+            <form onsubmit="return false">
+                <div class="event-details">
+                    <input type="text" id="eventNameInput" placeholder="Enter your event's name...">
+                    <input type="text" id="noOfAttendeesInput" placeholder="Enter number of attendees...">
+                </div>
+                <select id="categoryDropdown"></select>
+                <select id="treatDropdown" class="treat-dropdown"></select>
+                <input id="submitBtn" type="submit" value="Get your Quote">
+            </form>
+        </div>
 
-        <form onsubmit="return false">
-            <input type="text" id="eventNameInput" placeholder="Enter your event's name...">
-            <input type="text" id="noOfAttendeesInput" placeholder="Enter number of attendees...">
+        <!-- Quote info screen -->
+        <div id="quoteResult" class="screen">
+            <div>
+                <h2></h2>
+                <h2></h2>
+                <h2></h2>
+            </div>
+            <div>
+                <h1></h1>
+                <button id="newQuoteBtn" class="new-quote-btn">New Quote</button>
+            </div>
+        </div>
 
-            <select id="categoryDropdown"></select>
-            <select id="treatDropdown"></select>
-            <input id="submitBtn" type="submit" value="Get your Quote">
-        </form>
 
     </div>
 
