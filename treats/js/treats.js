@@ -2,6 +2,7 @@
 let submitBtnEl = $('#submitBtn'),
     initialFormEl = $('#initialForm'),
     categoryDropdownEl = $('#categoryDropdown'),
+    categoryDropdownItemEl = $('#categoryItem'),
     treatDropdownEl = $('#treatDropdown'),
     quoteResultEl = $('#quoteResult'),
     newQuoteBtnEl = $('#newQuoteBtn');
@@ -17,19 +18,17 @@ function init() {
     treatData = null;
     // Get treat categories
     $.getJSON('json/categories.json', function (categories) {
+        // treatCategoryData is an array of (category) objects
         treatCategoryData = categories;
-        // Add to dropdown
+        // Add categories to dropdown
         addCategoriesToDropdown(treatCategoryData.categories);
     });
     // FUNCTION: Add event listener to each category item and populate treatData dropdown
-
-
-    // TEST
-    // getTreatsByCategory(treatCategoryData.category);
-    // addTreatsToDropdown;
-
-
-
+    // addCategoryClickListeners();
+    categoryDropdownItemEl.on('click', function() {
+        console.log("it werks");
+        // https://jsfiddle.net/mjdwebdesign/v31kdggj/
+    });
 
     // Deal with screen change
     submitBtnEl.click(changeScreen);
@@ -41,7 +40,7 @@ function init() {
  * @param {Object} category
  */
 function getCategoryHTML(category) {
-    return `<option categoryId="${category.id}">${category.name}</option>`;
+    return `<option id="categoryItem" categoryId="${category.id}">${category.name}</option>`;
 };
 
 /**
@@ -49,7 +48,7 @@ function getCategoryHTML(category) {
  * @param {Object} treat
  */
 function getTreatHTML(treat) {
-    return `<option treatId="${treat.id}">${treat.name} ${treat.price}</option>`;
+    return `<option id="treatItem" treatId="${treat.id}">${treat.name} ${treat.price}</option>`;
 };
 
 
@@ -97,7 +96,12 @@ function addTreatsToDropdown() {
 };
 
 
-
+/**
+ * 
+ */
+function addCategoryClickListeners() {
+    // ??????????????????
+};
 
 
 
