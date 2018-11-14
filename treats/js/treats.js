@@ -2,7 +2,6 @@
 let submitBtnEl = $('#submitBtn'),
     initialFormEl = $('#initialForm'),
     categoryDropdownEl = $('#categoryDropdown'),
-    categoryDropdownItemEl = $('#categoryItem'),
     treatDropdownEl = $('#treatDropdown'),
     quoteResultEl = $('#quoteResult'),
     newQuoteBtnEl = $('#newQuoteBtn');
@@ -16,6 +15,7 @@ let treatCategoryData, treatData;
  */
 function init() {
     treatData = null;
+
     // Get treat categories
     $.getJSON('json/categories.json', function (categories) {
         // treatCategoryData is an array of (category) objects
@@ -23,36 +23,37 @@ function init() {
         // Add categories to dropdown
         addCategoriesToDropdown(treatCategoryData.categories);
     });
-    // FUNCTION: Add event listener to each category item and populate treatData dropdown
-    // addCategoryClickListeners();
-    categoryDropdownItemEl.on('click', function() {
-        console.log("it werks");
-        // https://jsfiddle.net/mjdwebdesign/v31kdggj/
+    categoryDropdownEl.on('change', function () {
+        // categoryEl is an object
+        let categoryElId = $('.category-item:selected').data('categoryid');
+        // console.log(categoryElId);
+        getTreatsByCategory(categoryElId);
     });
+
+
 
     // Deal with screen change
     submitBtnEl.click(changeScreen);
     newQuoteBtnEl.click(changeScreen);
 };
 
+
 /**
  * Gets the HTML string for each treat category item.
  * @param {Object} category
  */
 function getCategoryHTML(category) {
-    return `<option id="categoryItem" categoryId="${category.id}">${category.name}</option>`;
+    return `<option class="category-item" data-categoryId="${category.id}">${category.name}</option>`;
 };
+
 
 /**
  * Gets the HTML string for each treat item.
  * @param {Object} treat
  */
 function getTreatHTML(treat) {
-    return `<option id="treatItem" treatId="${treat.id}">${treat.name} ${treat.price}</option>`;
+    return `<option class="treat-item" data-treatId="${treat.id}">${treat.name}: ${treat.price}</option>`;
 };
-
-
-
 
 
 /**
@@ -64,25 +65,36 @@ function addCategoriesToDropdown(categories) {
     $.each(categories, function (i, category) {
         htmlString += getCategoryHTML(category);
     });
-    categoryDropdownEl.html(htmlString);
+    categoryDropdownEl.html(`<option value="" disabled selected>Select category</option>` + htmlString);
     // Need to add click event listeners to each category item (new function from init!)
 };
+
+
+
 
 /**
  * Populates the treatData array with treat objects of the given category
  * @param {Object} category 
  */
-function getTreatsByCategory(category) {
+function getTreatsByCategory(categoryElId) {
     treatData = [];
-    $.getJSON('json/treats.json', function (treats) {
-        // If in the given category, add to dropdown
-        $.each(treats, function (i, treat) {
-            if(treat.id === category.id) {
-                treatData.push(treat);
-            }
+    $.getJSON('json/treats.json', function (allTreats) {
+        // If in the given category, add to array
+        // $.each(allTreats.treats, function (i, treat) {
+        //     if(treat.id == categoryElId) {
+        //         treatData.push(treat);
+        //     }
+        // });
+        // console.log(treatData);
+        // Use filter!!! and grep???
+        treatData = allTreats.treats.filter(function (treat) {
+            return treat.id == categoryElId;
         });
+        console.log(treatData);
     });
-}
+
+
+};
 
 /**
  * 
