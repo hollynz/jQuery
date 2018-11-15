@@ -3,8 +3,11 @@ let submitBtnEl = $('#submitBtn'),
     initialFormEl = $('#initialForm'),
     categoryDropdownEl = $('#categoryDropdown'),
     treatDropdownEl = $('#treatDropdown'),
+    eventNameInputEl = ('#eventNameInput'),
+    noOfAttendeesInputEl = $('#noOfAttendeesInput'),
     quoteResultEl = $('#quoteResult'),
-    newQuoteBtnEl = $('#newQuoteBtn');
+    newQuoteBtnEl = $('#newQuoteBtn'),
+    selectedCategoryEl, selectedTreatEl; // Might need to set these to null or something
 
 // Global data variables
 let treatCategoryData, treatData;
@@ -15,7 +18,8 @@ let treatCategoryData, treatData;
  */
 function init() {
     treatData = null;
-
+    selectedCategoryEl = null;
+    selectedTreatEl = null;
     // Get treat categories
     $.getJSON('json/categories.json', function (categories) {
         // treatCategoryData is an array of (category) objects
@@ -24,17 +28,27 @@ function init() {
         addCategoriesToDropdown(treatCategoryData.categories);
     });
     categoryDropdownEl.on('change', function () {
-        // categoryEl is an object
-        let categoryElId = $('.category-item:selected').data('categoryid');
-        // console.log(categoryElId);
-        getTreatsByCategory(categoryElId);
+        selectedCategoryEl = $('.category-item:selected');
+        let selectedCategoryElId = selectedCategoryEl.data('categoryid');
+        getTreatsByCategory(selectedCategoryElId);
+        treatDropdownEl.removeClass('hidden');
     });
 
-
-
     // Deal with screen change
-    submitBtnEl.click(changeScreen);
-    newQuoteBtnEl.click(changeScreen);
+    submitBtnEl.on('click', changeScreen);
+    submitBtnEl.on('click', function (){
+        // Need to check type of attendees input value
+        selectedTreatEl = $('.treat-item:selected');
+        console.log(selectedTreatEl);
+        let totalPrice = parseInt(noOfAttendeesInputEl.val()) * selectedTreatEl.price;
+        console.log(totalPrice);
+
+    });
+    newQuoteBtnEl.on('click', function() {
+        treatDropdownEl.addClass('hidden');
+        // Reset dropdown
+        changeScreen();
+    });
 };
 
 
@@ -52,7 +66,7 @@ function getCategoryHTML(category) {
  * @param {Object} treat
  */
 function getTreatHTML(treat) {
-    return `<option class="treat-item" data-treatId="${treat.id}">${treat.name}: ${treat.price}</option>`;
+    return `<option class="treat-item" data-treatId="${treat.id}">${treat.name}: $${(treat.price).toFixed(2)}</option>`;
 };
 
 
@@ -76,24 +90,15 @@ function addCategoriesToDropdown(categories) {
  * Populates the treatData array with treat objects of the given category
  * @param {Object} category 
  */
-function getTreatsByCategory(categoryElId) {
+function getTreatsByCategory(selectedCategoryElId) {
     treatData = [];
     $.getJSON('json/treats.json', function (allTreats) {
         // If in the given category, add to array
-        // $.each(allTreats.treats, function (i, treat) {
-        //     if(treat.id == categoryElId) {
-        //         treatData.push(treat);
-        //     }
-        // });
-        // console.log(treatData);
-        // Use filter!!! and grep???
         treatData = allTreats.treats.filter(function (treat) {
-            return treat.id == categoryElId;
+            return treat.categoryId == selectedCategoryElId;
         });
-        console.log(treatData);
+        addTreatsToDropdown();
     });
-
-
 };
 
 /**
@@ -109,20 +114,18 @@ function addTreatsToDropdown() {
 
 
 /**
- * 
- */
-function addCategoryClickListeners() {
-    // ??????????????????
-};
-
-
-
-/**
  * Changes the screen.
  */
 function changeScreen() {
     initialFormEl.toggleClass('active');
     quoteResultEl.toggleClass('active');
+};
+
+/**
+ * 
+ */
+function calcPrice () {
+
 };
 
 init();
