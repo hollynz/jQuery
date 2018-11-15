@@ -3,7 +3,7 @@ let submitBtnEl = $('#submitBtn'),
     initialFormEl = $('#initialForm'),
     categoryDropdownEl = $('#categoryDropdown'),
     treatDropdownEl = $('#treatDropdown'),
-    eventNameInputEl = ('#eventNameInput'),
+    eventNameInputEl = $('#eventNameInput'),
     noOfAttendeesInputEl = $('#noOfAttendeesInput'),
     quoteResultEl = $('#quoteResult'),
     newQuoteBtnEl = $('#newQuoteBtn'),
@@ -39,14 +39,17 @@ function init() {
     submitBtnEl.on('click', function (){
         // Need to check type of attendees input value
         selectedTreatEl = $('.treat-item:selected');
-        console.log(selectedTreatEl);
-        let totalPrice = parseInt(noOfAttendeesInputEl.val()) * selectedTreatEl.price;
-        console.log(totalPrice);
+        // console.log(selectedTreatEl);
+        // let totalPrice = parseInt(noOfAttendeesInputEl.val()) * selectedTreatEl.price;
+        // console.log(totalPrice);
 
     });
     newQuoteBtnEl.on('click', function() {
         treatDropdownEl.addClass('hidden');
-        // Reset dropdown
+        // Reset dropdowns
+        categoryDropdownEl.val('');
+        eventNameInputEl.val('');
+        noOfAttendeesInputEl.val('');
         changeScreen();
     });
 };
