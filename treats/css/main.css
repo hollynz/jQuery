@@ -54,6 +54,16 @@ body {
     border: rgba(17, 6, 87, 0.5) solid 6px;
   }
 
+  /* .quote-summary-content {
+    height: 20vh;
+    width: 50%;
+    margin: auto;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 20%;
+    border-radius: 10px;
+    border: rgba(17, 6, 87, 0.5) solid 6px;
+  } */
+
   .event-details {
     display: flex;
     justify-content: space-evenly;

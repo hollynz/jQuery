@@ -6,7 +6,7 @@ let submitBtnEl = $('#submitBtn'),
     eventNameInputEl = $('#eventNameInput'),
     noOfAttendeesInputEl = $('#noOfAttendeesInput'),
     quoteSummaryEl = $('#quoteSummary'),
-    quoteSummaryHeadingsEl = $('#quoteSummaryHeadings'),
+    quoteSummaryContentEl = $('#quoteSummaryContent'),
     newQuoteBtnEl = $('#newQuoteBtn'),
     selectedCategoryEl; // Might need to set these to null or something
 
@@ -37,10 +37,9 @@ function init() {
 
     // Deal with screen change on submit
     submitBtnEl.on('click', function () {
-        // Need to check type of attendees input value!!!!!!!!!!!!
-        if (calcPrice()) {
-            displayQuoteSummaryScreen();
-        }
+        // Need to check type of attendees input value before calling calcPrice!!!!!!!!!!!!
+        let totalPrice = calcPrice();
+            displayQuoteSummaryScreen(totalPrice);
     });
     // Reset initial form
     newQuoteBtnEl.on('click', function () {
@@ -70,11 +69,11 @@ function getTreatHTML(treat) {
  * Gets the HTML string for each quote summary heading.
  * @param {string} text
  */
-function getSummaryHTML() {
-    return `<h1>${eventNameInputEl.val()}</h1>
-            <h2></h2>
-            <h2></h2>
-            <h2></h2>`;
+function getSummaryHTML(totalPrice) {
+    return `<h1 class="event-heading">${eventNameInputEl.val()}</h1>
+            <h2>$${totalPrice}</h2>
+            <h2>${eventNameInputEl.val()}</h2>
+            <h2>${eventNameInputEl.val()}</h2>`;
 };
 
 
@@ -122,9 +121,9 @@ function addTreatsToDropdown() {
 /**
  * Changes to quote summary screen.
  */
-function displayQuoteSummaryScreen() {
-    let htmlString = getSummaryHTML();
-    quoteSummaryHeadingsEl.html(htmlString);
+function displayQuoteSummaryScreen(totalPrice) {
+    let htmlString = getSummaryHTML(totalPrice);
+    quoteSummaryContentEl.html(htmlString);
     changeScreen();
 };
 
@@ -159,8 +158,7 @@ function calcPrice() {
     })[0].price;
     let noOfAttendees = noOfAttendeesInputEl.val();
     let totalPrice = parseInt(noOfAttendees) * selectedTreatPrice;
-    console.log(totalPrice);
-    return true;
+    return totalPrice;
 };
 
 init();
