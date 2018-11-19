@@ -5,7 +5,8 @@ let submitBtnEl = $('#submitBtn'),
     treatDropdownEl = $('#treatDropdown'),
     eventNameInputEl = $('#eventNameInput'),
     noOfAttendeesInputEl = $('#noOfAttendeesInput'),
-    quoteResultEl = $('#quoteResult'),
+    quoteSummaryEl = $('#quoteSummary'),
+    quoteSummaryHeadingsEl = $('#quoteSummaryHeadings'),
     newQuoteBtnEl = $('#newQuoteBtn'),
     selectedCategoryEl; // Might need to set these to null or something
 
@@ -34,24 +35,16 @@ function init() {
         treatDropdownEl.removeClass('hidden');
     });
 
-    // Deal with screen change
+    // Deal with screen change on submit
     submitBtnEl.on('click', function () {
         // Need to check type of attendees input value!!!!!!!!!!!!
-        selectedTreatId = treatDropdownEl.val();
-        let selectedTreatPrice = treatData.filter(function (treat) {
-            return treat.id == selectedTreatId;
-        })[0].price;
-        let totalPrice = parseInt(noOfAttendeesInputEl.val()) * selectedTreatPrice;
-        changeScreen();
+        if (calcPrice()) {
+            displayQuoteSummaryScreen();
+        }
     });
     // Reset initial form
-    newQuoteBtnEl.on('click', function() {
-        treatDropdownEl.addClass('hidden');
-        categoryDropdownEl.val('');
-        treatDropdownEl.val('');
-        eventNameInputEl.val('');
-        noOfAttendeesInputEl.val('');
-        changeScreen();
+    newQuoteBtnEl.on('click', function () {
+        displayNewQuoteScreen();
     });
 };
 
@@ -73,6 +66,17 @@ function getTreatHTML(treat) {
     return `<option class="treat-item" value="${treat.id}">${treat.name}: $${(treat.price).toFixed(2)}</option>`;
 };
 
+/**
+ * Gets the HTML string for each quote summary heading.
+ * @param {string} text
+ */
+function getSummaryHTML() {
+    return `<h1>${eventNameInputEl.val()}</h1>
+            <h2></h2>
+            <h2></h2>
+            <h2></h2>`;
+};
+
 
 /**
  * Adds an array of objects to a dropdown menu.
@@ -84,9 +88,7 @@ function addCategoriesToDropdown(categories) {
         htmlString += getCategoryHTML(category);
     });
     categoryDropdownEl.html(`<option value="" disabled selected>Select category</option>` + htmlString);
-    // Need to add click event listeners to each category item (new function from init!)
 };
-
 
 
 
@@ -118,18 +120,47 @@ function addTreatsToDropdown() {
 
 
 /**
+ * Changes to quote summary screen.
+ */
+function displayQuoteSummaryScreen() {
+    let htmlString = getSummaryHTML();
+    quoteSummaryHeadingsEl.html(htmlString);
+    changeScreen();
+};
+
+
+/**
+* Changes to new quote screen.
+*/
+function displayNewQuoteScreen() {
+    treatDropdownEl.addClass('hidden');
+    eventNameInputEl.val('');
+    noOfAttendeesInputEl.val('');
+    categoryDropdownEl.val('');
+    treatDropdownEl.val('');
+    changeScreen();
+};
+
+/**
  * Changes the screen.
  */
 function changeScreen() {
     initialFormEl.toggleClass('active');
-    quoteResultEl.toggleClass('active');
+    quoteSummaryEl.toggleClass('active');
 };
 
 /**
  * 
  */
-function calcPrice () {
-
+function calcPrice() {
+    selectedTreatId = treatDropdownEl.val();
+    let selectedTreatPrice = treatData.filter(function (treat) {
+        return treat.id == selectedTreatId;
+    })[0].price;
+    let noOfAttendees = noOfAttendeesInputEl.val();
+    let totalPrice = parseInt(noOfAttendees) * selectedTreatPrice;
+    console.log(totalPrice);
+    return true;
 };
 
 init();
