@@ -7,15 +7,16 @@ let submitBtnEl = $('#submitBtn'),
     noOfAttendeesInputEl = $('#noOfAttendeesInput'),
     quoteSummaryEl = $('#quoteSummary'),
     quoteSummaryContentEl = $('#quoteSummaryContent'),
+    priceSummaryEl = $('#priceSummary'),
     newQuoteBtnEl = $('#newQuoteBtn'),
-    selectedCategoryEl; // Might need to set these to null or something
+    selectedCategoryEl;
 
 // Global data variables
-let treatCategoryData, treatData, selectedTreatId;
+let treatCategoryData, treatData, selectedTreatId, noOfAttendees;
 
 
 /**
- * Initialise app
+ * Initialise app.
  */
 function init() {
     treatData = null;
@@ -34,12 +35,16 @@ function init() {
         getTreatsByCategory(selectedCategoryId);
         treatDropdownEl.removeClass('hidden');
     });
-
-    // Deal with screen change on submit
+    // Screen change on submit
     submitBtnEl.on('click', function () {
-        // Need to check type of attendees input value before calling calcPrice!!!!!!!!!!!!
-        let totalPrice = calcPrice();
+        selectedTreatId = treatDropdownEl.val();
+        noOfAttendees = noOfAttendeesInputEl.val();
+        if(Math.floor(noOfAttendees) == +noOfAttendees && $.isNumeric(noOfAttendees)) {
+            let totalPrice = calcPrice();
             displayQuoteSummaryScreen(totalPrice);
+        } else {
+            alert('Please enter an integer value of attendees!');
+        }
     });
     // Reset initial form
     newQuoteBtnEl.on('click', function () {
@@ -62,24 +67,33 @@ function getCategoryHTML(category) {
  * @param {Object} treat
  */
 function getTreatHTML(treat) {
-    return `<option class="treat-item" value="${treat.id}">${treat.name}: $${(treat.price).toFixed(2)}</option>`;
+    return `<option class="treat-item" value="${treat.id}">${treat.name}: $${treat.price.toFixed(2)}</option>`;
 };
 
 /**
  * Gets the HTML string for each quote summary heading.
- * @param {string} text
  */
-function getSummaryHTML(totalPrice) {
-    return `<h1 class="event-heading">${eventNameInputEl.val()}</h1>
-            <h2>$${totalPrice}</h2>
-            <h2>${eventNameInputEl.val()}</h2>
-            <h2>${eventNameInputEl.val()}</h2>`;
+function getQuoteSummaryHTML() {
+    let selectedTreat = treatData.filter(function (treat) {
+        return treat.id == selectedTreatId;
+    })[0];
+    return `<h2 class="event-heading">${eventNameInputEl.val()}</h2>
+            <h2 class="attendees-heading">${noOfAttendeesInputEl.val()}</h2>
+            <h2 class="treat-heading">${selectedTreat.name}</h2>`;
 };
 
+/**
+ * Gets the HTML string for the total price for quote.
+ * @param {number} totalPrice
+ */
+function getPriceSummaryHTML(totalPrice) {
+    console.log(typeof totalPrice);
+    return `<h2>$${totalPrice.toFixed(2)}</h2>`;
+};
 
 /**
  * Adds an array of objects to a dropdown menu.
- * @param {Array} data 
+ * @param {Array} categories 
  */
 function addCategoriesToDropdown(categories) {
     let htmlString = '';
@@ -89,11 +103,9 @@ function addCategoriesToDropdown(categories) {
     categoryDropdownEl.html(`<option value="" disabled selected>Select category</option>` + htmlString);
 };
 
-
-
 /**
  * Populates the treatData array with treat objects of the given category
- * @param {Object} category 
+ * @param {Object} selectedCategoryId 
  */
 function getTreatsByCategory(selectedCategoryId) {
     treatData = [];
@@ -107,7 +119,7 @@ function getTreatsByCategory(selectedCategoryId) {
 };
 
 /**
- * 
+ * Populates the treat dropdown with all treat data.
  */
 function addTreatsToDropdown() {
     let htmlString = "";
@@ -117,13 +129,14 @@ function addTreatsToDropdown() {
     treatDropdownEl.html(htmlString);
 };
 
-
 /**
  * Changes to quote summary screen.
  */
 function displayQuoteSummaryScreen(totalPrice) {
-    let htmlString = getSummaryHTML(totalPrice);
-    quoteSummaryContentEl.html(htmlString);
+    let quoteSummary = getQuoteSummaryHTML();
+    quoteSummaryContentEl.html(quoteSummary);
+    let priceSummary = getPriceSummaryHTML(totalPrice);
+    priceSummaryEl.html(priceSummary);
     changeScreen();
 };
 
@@ -149,14 +162,12 @@ function changeScreen() {
 };
 
 /**
- * 
+ * Calculates the total price for selected treat given the number of attendees.
  */
 function calcPrice() {
-    selectedTreatId = treatDropdownEl.val();
     let selectedTreatPrice = treatData.filter(function (treat) {
         return treat.id == selectedTreatId;
     })[0].price;
-    let noOfAttendees = noOfAttendeesInputEl.val();
     let totalPrice = parseInt(noOfAttendees) * selectedTreatPrice;
     return totalPrice;
 };

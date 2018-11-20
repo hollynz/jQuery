@@ -41,10 +41,7 @@ body {
     font-weight: 100; 
   }
 
-  form {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+  .initial-form, .quote-summary {
     height: 20vh;
     width: 50%;
     margin: auto;
@@ -54,15 +51,15 @@ body {
     border: rgba(17, 6, 87, 0.5) solid 6px;
   }
 
-  /* .quote-summary-content {
-    height: 20vh;
-    width: 50%;
-    margin: auto;
-    background-color: rgba(0, 0, 0, 0.2);
-    padding: 20%;
-    border-radius: 10px;
-    border: rgba(17, 6, 87, 0.5) solid 6px;
-  } */
+  .initial-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
+  .quote-summary {
+    
+  }
 
   .event-details {
     display: flex;
