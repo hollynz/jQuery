@@ -12,7 +12,10 @@
     <title>Sweet Treats</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.css" />
     <link href="https://fonts.googleapis.com/css?family=Crafty+Girls" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
 </head>
 
@@ -21,27 +24,34 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-    <h1>Sweet Treats</h1>
+    <h1>Treat Yo'self</h1>
     <div class="container content">
 
         <!-- Initial form: home screen -->
         <div id="initialForm" class="screen active">
             <form class="initial-form" onsubmit="return false">
-                <div class="event-details">
-                    <input type="text" id="eventNameInput" placeholder="Enter your event's name...">
-                    <input type="text" id="noOfAttendeesInput" placeholder="Enter number of attendees...">
+                <!-- <h2 class="title is-info">Generate Your Quote:</h2> -->
+                <div class="initial-form-container">
+                    <input type="text" id="eventNameInput" class="input" placeholder="Enter your event's name...">
+                    <input type="text" id="noOfAttendeesInput" class="input" placeholder="Enter number of attendees...">
+                    <select id="categoryDropdown" class="select"></select>
+                    <select id="treatDropdown" class="select hidden"></select>
+                    <input id="submitBtn" class='button submit-btn is-warning' type="submit" value="Get your Quote">
                 </div>
-                <select id="categoryDropdown"></select>
-                <select id="treatDropdown" class="hidden"></select>
-                <input id="submitBtn" type="submit" value="Get your Quote">
             </form>
         </div>
 
         <!-- Quote summary screen -->
         <div id="quoteSummary" class="screen quote-summary">
-            <div id="quoteSummaryContent" class="quote-summary-content"></div>
-            <div id="priceSummary"></div>
-            <button id="newQuoteBtn" class="new-quote-btn">New Quote</button>
+            <div class="columns">
+                <div class="column">
+                    <div id="quoteSummaryContent" class="quote-summary-content"></div>
+                </div>
+                <div class="column">
+                    <div id="priceSummary"></div>
+                    <button id="newQuoteBtn" class="button new-quote-btn is-warning">New Quote</button>
+                </div>
+            </div>
         </div>
     </div>
 

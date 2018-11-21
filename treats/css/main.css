@@ -1,9 +1,13 @@
 body {
-  padding-top: 2%;
-  padding-bottom: 2%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 6%;
+  padding-bottom: 6%;
   width: 100%;
   height: 100vh;
   background: linear-gradient(to top, rgba(16, 178, 241, 0.4), rgba(255, 255, 255, 0.9)) no-repeat;
+  background: url('../img/chocolate2.jpg') center / cover;
 }
 
 .container {
@@ -11,59 +15,80 @@ body {
     margin: 2% auto;
   }
   
-  /* links */
-  .main-nav li{
-    display: inline-block;
-    padding: 10px 20px;
-  }
-  .main-nav a{
-    color: green;
-    text-decoration: none;
-  }
-  .main-nav a.active{
-    text-decoration: underline;
-  }
-  
   /* screens */
   .content .screen {
     display: none;
+    margin-top: 4%;
   }
   .screen.active {
-    display: block;
+    display: flex;
+    justify-content: center;
   }
 
   h1 {
     text-align: center;
-    font-size: 5em;
-    color: rgb(17, 6, 87);
+    font-size: 8em;
+    color: rgb(242, 240, 252);
     text-shadow: 2px 2px rgba(169, 66, 238, 0.392);
     font-family: 'Crafty Girls', cursive;
-    font-weight: 100; 
+    font-family: 'Orbitron', sans-serif;
+    font-family: 'Cookie', cursive;
+    font-weight: 500; 
   }
 
   .initial-form, .quote-summary {
-    height: 20vh;
+    height: 50vh;
     width: 50%;
-    margin: auto;
-    background-color: rgba(0, 0, 0, 0.2);
-    padding: 10%;
+    background-color: rgba(253, 101, 177, 0.678);
+    padding: 5%;
     border-radius: 10px;
     border: rgba(17, 6, 87, 0.5) solid 6px;
   }
 
-  .initial-form {
+  .initial-form-container {
+    height: 80%;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    width: 100%;
+    margin: auto;
+}
+
+  .input, .button, .select {
+    width: 80%;
+    margin: auto;
+    border: rgba(17, 6, 87, 0.7) solid 0.5px;
+    color: #000;
+    border-radius: 4px;
+  }
+
+  .button.is-warning, .button.is-warning {
+    border: solid white 1px;
+    color: rgb(17, 6, 87);
+}
+
+  .button.is-warning:hover, .button.is-warning.is-hovered {
+    border: solid rgba(17, 6, 87, 0.7) 1px;
+    color: #000;
+}
+
+  .submit-btn, .new-quote-btn {
+    margin-top: 5%;
+    width: 50%;
+    font-size: 1.4em;
+  }
+
+  .content .title {
+    text-align: center;
+    color: rgb(17, 6, 87);
+    /* font-family: 'Crafty Girls', cursive; */
   }
 
   .quote-summary {
-    
   }
 
-  .event-details {
-    display: flex;
-    justify-content: space-evenly;
+  .quote-summary .button {
+    width: 100%;
   }
 
   .hidden {
