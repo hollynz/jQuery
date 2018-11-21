@@ -77,12 +77,18 @@ function getQuoteSummaryHTML() {
     let selectedTreat = treatData.filter(function (treat) {
         return treat.id == selectedTreatId;
     })[0];
-    return `<h3>Event:</h3>
-            <h2 class="event-heading">${eventNameInputEl.val()}</h2>
-            <h3>Number of Attendees:</h3>
-            <h2 class="attendees-heading">${noOfAttendeesInputEl.val()}</h2>
-            <h3>Chosen treat:</h3>
-            <h2 class="treat-heading">${selectedTreat.name}</h2>`;
+    return `<div class="quote-summary-item">
+                <h3>Event:</h3>
+                <h2 class="quote-summary-heading">${eventNameInputEl.val()}</h2>
+            </div>
+            <div class="quote-summary-item">
+                <h3>Number of Attendees:</h3>
+                <h2 class="quote-summary-heading">${noOfAttendeesInputEl.val()}</h2>
+            </div>
+            <div class="quote-summary-item">
+                <h3>Chosen treat:</h3>
+                <h2 class="quote-summary-heading">${selectedTreat.name}</h2>
+            <div>`;
 };
 
 /**

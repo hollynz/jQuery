@@ -94,6 +94,23 @@ body {
     width: 100%;
   }
 
+  .content h3 {
+    color: white;
+  }
+
+  .column {
+    align-content: space-between;
+  }
+
+  .quote-summary-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .summary-heading {
+    /* margin: 0; */
+  }
+
   .hidden {
     display: none;
   }
