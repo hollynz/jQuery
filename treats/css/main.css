@@ -13,6 +13,8 @@ body {
 .container {
     width: 1200px;
     margin: 2% auto;
+    display: flex;
+    justify-content: center;
   }
   
   /* screens */
@@ -38,11 +40,13 @@ body {
 
   .initial-form, .quote-summary {
     height: 50vh;
-    width: 50%;
+    width: 35vw;
     background-color: rgba(253, 101, 177, 0.678);
-    padding: 5%;
+    padding: 3%;
     border-radius: 10px;
     border: rgba(17, 6, 87, 0.5) solid 6px;
+    display: flex;
+    align-content: center;
   }
 
   .initial-form-container {
@@ -50,11 +54,13 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    width: 100%;
+    width: 80%;
     margin: auto;
 }
 
   .input, .button, .select {
+    font-size: 1.1em;
+    padding: 1%;
     width: 80%;
     margin: auto;
     border: rgba(17, 6, 87, 0.7) solid 0.5px;
@@ -82,9 +88,6 @@ body {
     text-align: center;
     color: rgb(17, 6, 87);
     /* font-family: 'Crafty Girls', cursive; */
-  }
-
-  .quote-summary {
   }
 
   .quote-summary .button {

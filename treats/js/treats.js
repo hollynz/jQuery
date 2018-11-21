@@ -43,7 +43,7 @@ function init() {
             let totalPrice = calcPrice();
             displayQuoteSummaryScreen(totalPrice);
         } else {
-            alert('Please enter an integer value of attendees!');
+            alert('Please enter a valid number of attendees!');
         }
     });
     // Reset initial form
